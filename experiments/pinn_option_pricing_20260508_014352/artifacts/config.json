@@ -1,0 +1,67 @@
+{
+  "seed": 42,
+  "experiment": {
+    "name": "pinn_option_pricing",
+    "output_root": "experiments",
+    "log_level": "INFO"
+  },
+  "data": {
+    "csv_path": "data/historical_prices.csv",
+    "assets": [
+      "Asset1",
+      "Asset2"
+    ],
+    "start_date": null,
+    "end_date": null
+  },
+  "pde": {
+    "time_horizon": 1.0,
+    "risk_free_rate": 0.01,
+    "sigma": [
+      0.2,
+      0.2
+    ],
+    "correlation": [
+      [
+        1.0,
+        0.5
+      ],
+      [
+        0.5,
+        1.0
+      ]
+    ],
+    "option_type": "call",
+    "strike": 1.0,
+    "basket_weights": [
+      0.5,
+      0.5
+    ]
+  },
+  "model": {
+    "hidden_layers": 6,
+    "hidden_units": 128,
+    "output_dim": 1
+  },
+  "training": {
+    "epochs": 50000,
+    "learning_rate": 0.001,
+    "weight_decay": "1e-6",
+    "lambda_interior": 1.0,
+    "lambda_boundary": 10.0,
+    "lambda_terminal": 10.0,
+    "use_lbfgs": false,
+    "patience": 200
+  },
+  "collocation": {
+    "interior_points": 50000,
+    "boundary_points": 10000,
+    "terminal_points": 10000,
+    "time_horizon": 1.0
+  },
+  "monte_carlo": {
+    "steps": 252,
+    "n_paths": 100000,
+    "confidence_level": 0.95
+  }
+}
